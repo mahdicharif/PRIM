@@ -1,7 +1,7 @@
 # PRIM
 Ce dossier contient tous les fichiers propres au projet PRIM (Télécom Paris).
 
-Les dumps Wikipedia sont extraits https://dumps.wikimedia.org/enwiki/20201001/ . Ils sont trop volumineux pour être ajoutés à ce dossier.
+Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia.org/enwiki/20201001/ . Ils sont trop volumineux pour être ajoutés à ce dossier.
 
 **Du 29/09/2020 au 13/10/2020**
 
