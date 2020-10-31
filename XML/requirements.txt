@@ -1,0 +1,14 @@
+lxml
+wikitextparser
+pandas
+re
+networkx
+mwparserfromhell 
+annoy
+sentence-transformers
+torch
+os
+matplotlib
+functools
+bz2
+subprocess
