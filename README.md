@@ -5,6 +5,7 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 
 **Du 29/09/2020 au 13/10/2020**
 
+- Choix du dataset : films de Wikipedia
 - Téléchargement de milliers de pages Wikipedia sur des films (format HTML)
 - Preprocessing des données en récupérant les deux premières sections de chaque page (parsing HTML)
 - Calcul des embeddings avec BERT (utilisation d'un modèle multilingue pré-entrainé).
