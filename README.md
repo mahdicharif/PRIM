@@ -12,7 +12,7 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 - Stockage des encoding avec la librairie Annoy
 --> ceci facilite l'import des articles encodé pour les comparer avec un nouvel article en entrée. Ceci permet de n'avoir à encoder qu'un seul article à chaque manipulation.
 
-**Du 13/10/2020 au 03/10/2020**
+**Du 13/10/2020 au 03/11/2020**
 
 - Utilisation de parsers HTML et XML sur un dump Wikipedia.
 - Preprocessing du texte pour éliminer les tags non traités par les parsers.
