@@ -17,7 +17,13 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 - Utilisation de parsers HTML et XML sur un dump Wikipedia.
 - Preprocessing du texte pour éliminer les tags non traités par les parsers.
 - Récupération des titres des articles et des liens internes (wikilinks)
-- Création de graphs (networkx) pour lier un article donné et ses liens.
+- Création de graphes (networkx) pour lier un article donné et ses liens.
 - Calcul de la similarité entre les différents textes.
 
 --> utilisation de BERT (impliquant des transformers).
+
+**Du 03/11/2020 au 17/11/2020**
+
+- Configuration d'un tunnel SSH pour le transfert des fichiers vers les machines LAMES de Télécom Paris.
+- Envoi des fichiers volumineux sur la machine distante. 
+- Exploitation des graphes pour déterminer le chemin le plus court d'un article Wikipédia à un autre (shortest path).
