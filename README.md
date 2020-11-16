@@ -32,3 +32,9 @@ Je travaille toujours sur une portion (1/30) du dump total. Ceci me permet de pa
 - De nombreux problèmes subsistent après nettoyage du texte (des tags sont transformés en texte, par exemple).
 --> modification du parser pour y ajouter un parser HTML et un parser XML supplémentaire (mwparserfromhell).
 - Prise en compte d'un problème redondant de Wikipédia : les articles de redirection.
+
+Objectif pour les prochaines semaines :
+
+- Application des méthodes de parsing et pre-processing sur le dump entier.
+- Création de graphes sur la totalité du dataset et calcul du shortest path.
+--> essai des fonctions de networkx et essai de pyspdag 
