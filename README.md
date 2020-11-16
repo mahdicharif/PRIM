@@ -24,6 +24,9 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 
 **Du 03/11/2020 au 17/11/2020**
 
+Compte tenu du fait que beaucoup de textes devaient être traités de nouveau afin d'éliminer les tags XML superflus et que beaucoup d'articles n'étaient en réalité que des redirections vers d'autres articles, j'ai laissé les graphes en suspens.
+Je travaille toujours sur une portion (1/30) du dump total. Ceci me permet de parfaire le pre processing des données avant d'appliquer ces techniques à un très grand jeu de données (plus de 17Go compressés). L'utilisation de la totalité du Dump résoudra le problème des redirections ne pointant vers aucune page.
+
 - Configuration d'un tunnel SSH pour le transfert des fichiers vers les machines LAMES de Télécom Paris.
 - Envoi des fichiers volumineux sur la machine distante. 
 - De nombreux problèmes subsistent après nettoyage du texte (des tags sont transformés en texte, par exemple).
