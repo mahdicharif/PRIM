@@ -4,6 +4,7 @@ import xml.sax
 import re
 from annoy import AnnoyIndex
 from sentence_transformers import SentenceTransformer,util
+import mwparserfromhell
 
 class WikiXmlHandler(xml.sax.handler.ContentHandler):
     """Content handler for Wiki XML data using SAX"""
@@ -32,7 +33,16 @@ class WikiXmlHandler(xml.sax.handler.ContentHandler):
 
         if name == 'page':
             if "disambiguation" not in self._values['text']:
-                self._pages.append((self._values['title'], self._values['text']))
+                
+                wiki = mwparserfromhell.parse(self._values['text'])
+
+                tr = wiki.strip_code().strip()
+                cleaned_text = cleanhtml(tr)
+                cleaned_text = cleaned_text.split("\n")[0]
+                
+                wikilinks = [x.title for x in wiki.filter_wikilinks()]
+                
+                self._pages.append((self._values['title'], cleaned_text, wikilinks))
 
 
 def cleanhtml(raw_html):
@@ -53,7 +63,7 @@ def store_data(data, name_output="articles_encoding.ann"):
             try:
 
                 v = model.encode(text_art)
-                t.add_item(row["ID_Article"], v)
+                t.add_item(i, v)
 
             except:
 
