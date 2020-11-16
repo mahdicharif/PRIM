@@ -27,4 +27,5 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 - Configuration d'un tunnel SSH pour le transfert des fichiers vers les machines LAMES de Télécom Paris.
 - Envoi des fichiers volumineux sur la machine distante. 
 - De nombreux problèmes subsistent après nettoyage du texte (des tags sont transformés en texte, par exemple).
+--> modification du parser pour y ajouter un parser HTML et un parser XML supplémentaire (mwparserfromhell).
 - Prise en compte d'un problème redondant de Wikipédia : les articles de redirection.
