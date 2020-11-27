@@ -38,3 +38,12 @@ Objectif pour les prochaines semaines :
 - Application des méthodes de parsing et pre-processing sur le dump entier.
 - Création de graphes sur la totalité du dataset et calcul du shortest path.
 --> essai des fonctions de networkx et essai de pyspdag 
+
+**Du 17/11/2020 au 01/12/2020**
+
+- Application des techniques de parsing à la totalité du dump
+--> Temps d'exécution considérable : plus de 14h pour 7.3 millions d'articles. 
+- Partitionnement des fichiers .pkl contenant les articles, leurs textes et leurs liens internes. J'avais décidé d'inclure dans chacun des fichiers 100 000 articles, afin de pouvoir vider le cache après le stockage. Ceci permettait d'éviter un crash du notebook mais aussi de pouvoir reprendre à un certain indice si ce crash arrivait, sans avoir à regénérer la totalité du fichier.
+- Encoding des textes des articles et stockage via Annoy
+- Gestion des redirections
+--> Le processing du dump de la totalité de Wikipédia permet de trouver les pages de redirection, chose qui n'était pas possible sur une petite portion du dump (comme lors des semaines précédentes).
