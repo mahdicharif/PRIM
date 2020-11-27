@@ -6,6 +6,16 @@ from annoy import AnnoyIndex
 from sentence_transformers import SentenceTransformer,util
 import mwparserfromhell
 
+
+# Cette fonction vient en complément des parsers, afin de parfaire certains parsing ne nettoyant pas le texte de façon optimale.
+
+def cleanhtml(raw_html):
+    cleanr = re.compile('<.*?>')
+    cleantext = re.sub(cleanr, '', raw_html)
+    return cleantext
+
+# Cette classe permet de récupérer les articles, leurs textes et liens internes (wikilinks)
+
 class WikiXmlHandler(xml.sax.handler.ContentHandler):
     """Content handler for Wiki XML data using SAX"""
     def __init__(self):
@@ -43,14 +53,108 @@ class WikiXmlHandler(xml.sax.handler.ContentHandler):
                 wikilinks = [x.title for x in wiki.filter_wikilinks()]
                 
                 self._pages.append((self._values['title'], cleaned_text, wikilinks))
+                
+                
+                
+# Cette fonction reprend la classe précédente et effectue le processing sur tout un dump. Elle produit des fichiers pickle contenant les articles, leurs textes et les liens internes.
+                
+def process_data(path):
+
+    # Object for handling xml
+    handler = WikiXmlHandler()
+
+    # Parsing object
+    parser = xml.sax.make_parser()
+    parser.setContentHandler(handler)
+    i = 0
+    old = 0
+    for line in bz2.BZ2File(data_path, 'r'):
+        parser.feed(line)
+        if i == 0:
+            old = len(handler._pages)
+            i+=1
+        else:
+            temp_old = len(handler._pages)
+            
+            if old != len(handler._pages):
+                i+=1
+                temp_old = len(handler._pages)
+
+                if  i % 100000 == 0:
+
+                    print("{} articles have been processed".format(i))
 
 
-def cleanhtml(raw_html):
-    cleanr = re.compile('<.*?>')
-    cleantext = re.sub(cleanr, '', raw_html)
-    return cleantext
+                    article_name = []
+                    text_article = []
+                    wikil = [] # Cette liste contient tous les wikilinks/liens internes
+
+                    for p in handler._pages:
+                        chosen_page = p
+
+                        article_name.append(chosen_page[0])
+
+                        text_article.append(chosen_page[1])
+
+                        wikil.append(chosen_page[2])
+
+                    for k in range(len(wikil)):
+                        wikil[k] = list(map(str, wikil[k]))
+
+                    dict_articles = {"Name_article" : article_name, "Text_article" : text_article, "Links" : wikil}
+                    links_nodes = pd.DataFrame(data = dict_articles) 
+
+                    links_nodes.to_pickle("D:/XML/data/links_nodes_" + str(i/100000) + ".pkl")
+                    
+                    old = len(handler._pages)
+                    
+                    links_nodes, dict_articles, article_name, text_article, wikil = [None]*5
 
 
+                    # Object for handling xml
+                    handler._pages = []
+                    temp_old = 0
+                    
+                    time.sleep(30)
+
+            old = temp_old
+        
+# Cette fonction prend en compte les redirections de chaque article et tente de récupérer le contenu de l'article vers lequel il est redirigé
+        
+def redir_handler(data):
+    for i,row in data.iterrows():
+        
+        if "REDIRECT" in row["Text_article"]:
+            
+            if "REDIRECT " in row["Text_article"]: # Cas où il y aurait un espace après REDIRECT
+                target = row["Text_article"].replace("REDIRECT ","")
+
+            else:
+                target = row["Text_article"].replace("REDIRECT ","")
+
+            while True:
+                
+                if target in data["Name_article"]:
+                    
+                    if "REDIRECT" not in row[row["Name_article"] == target]["Text_article"]:
+                        row["Text_article"] = target
+                    
+                    else:
+                        
+                        if "REDIRECT " in row["Text_article"]:
+                            target = row[row["Text_article"] == target]["Text_article"].replace("REDIRECT", "")
+                        
+                        else:
+                            target = row[row["Text_article"] == target]["Text_article"].replace("REDIRECT ", "")
+                        
+                else:
+                    break
+            
+    return data
+                       
+
+# Ces fonctions permettent de stocker et importer les embeddings des textes de chaque article
+    
 def store_data(data, name_output="articles_encoding.ann"):
     model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
 
@@ -84,6 +188,8 @@ def import_enc(file_name = "articles_encoding.ann"):
     model = SentenceTransformer('distilbert-base-nli-stsb-mean-tokens')
     embeddings = load_corpus(file_name)
     return(model, embeddings)
+
+# Cette fonction permet de renvoyer la meilleure prédiction
 
 def produce_prediction(query_text, model, embeddings, top_n = 3):
     query = model.encode(query_text)
