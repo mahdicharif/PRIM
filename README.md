@@ -47,5 +47,8 @@ Objectif pour les prochaines semaines :
 --> ces manipulations sont très coûteuses en mémoire. J'ai tenté plusieurs approches, impliquant l'utilisation de différentes librairies.
 - Décision d'empiler tous les noms des articles dans un seul et même fichier et d'en faire de même pour les textes des articles et des wikilinks.
 Ce choix a été compte tenu du fait des erreurs de mémoire qui apparaissaient et des limites de taille de fichiers pour le stockage sous format pickle.
+
+NB : Un problème de connexion SSH m'a empêché d'utiliser les ressources des machines de Télécom Paris.
+
 - Gestion des redirections
 --> Le processing du dump de la totalité de Wikipédia permet de trouver les pages de redirection, chose qui n'était pas possible sur une petite portion du dump (comme lors des semaines précédentes).
