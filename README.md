@@ -44,6 +44,8 @@ Objectif pour les prochaines semaines :
 - Application des techniques de parsing à la totalité du dump
 --> Temps d'exécution considérable : plus de 14h pour 7.3 millions d'articles. 
 - Partitionnement des fichiers .pkl contenant les articles, leurs textes et leurs liens internes. J'avais décidé d'inclure dans chacun des fichiers 100 000 articles, afin de pouvoir vider le cache après le stockage. Ceci permettait d'éviter un crash du notebook mais aussi de pouvoir reprendre à un certain indice si ce crash arrivait, sans avoir à regénérer la totalité du fichier.
-- Encoding des textes des articles et stockage via Annoy
+--> ces manipulations sont très coûteuses en mémoire. J'ai tenté plusieurs approches, impliquant l'utilisation de différentes librairies.
+- Décision d'empiler tous les noms des articles dans un seul et même fichier et d'en faire de même pour les textes des articles et des wikilinks.
+Ce choix a été compte tenu du fait des erreurs de mémoire qui apparaissaient et des limites de taille de fichiers pour le stockage sous format pickle.
 - Gestion des redirections
 --> Le processing du dump de la totalité de Wikipédia permet de trouver les pages de redirection, chose qui n'était pas possible sur une petite portion du dump (comme lors des semaines précédentes).
