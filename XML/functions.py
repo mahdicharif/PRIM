@@ -121,36 +121,23 @@ def process_data(path):
         
 # Cette fonction prend en compte les redirections de chaque article et tente de récupérer le contenu de l'article vers lequel il est redirigé
         
-def redir_handler(data):
-    for i,row in data.iterrows():
+def redir_handler(articles, texts, n = 10):
+    for i,row in texts[:n].iterrows():
         
         if "REDIRECT" in row["Text_article"]:
             
             if "REDIRECT " in row["Text_article"]: # Cas où il y aurait un espace après REDIRECT
                 target = row["Text_article"].replace("REDIRECT ","")
-
+    
             else:
                 target = row["Text_article"].replace("REDIRECT ","")
-
-            while True:
-                
-                if target in data["Name_article"]:
-                    
-                    if "REDIRECT" not in row[row["Name_article"] == target]["Text_article"]:
-                        row["Text_article"] = target
-                    
-                    else:
-                        
-                        if "REDIRECT " in row["Text_article"]:
-                            target = row[row["Text_article"] == target]["Text_article"].replace("REDIRECT", "")
-                        
-                        else:
-                            target = row[row["Text_article"] == target]["Text_article"].replace("REDIRECT ", "")
-                        
-                else:
-                    break
             
-    return data
+            if target in articles["Name_article"].tolist():
+                
+                text_ind = articles[articles["Name_article"] == target].index[0]
+                row["Text_article"] = texts.loc[[text_ind]]["Text_article"].tolist()[0]
+           
+    return texts
                        
 
 # Ces fonctions permettent de stocker et importer les embeddings des textes de chaque article
