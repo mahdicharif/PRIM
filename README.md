@@ -5,8 +5,8 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 
 **Du 29/09/2020 au 13/10/2020**
 
-- Choix du dataset : films de Wikipedia
-- Téléchargement de milliers de pages Wikipedia sur des films (format HTML)
+- Choix du dataset : articles sur des films, tirés de Wikipédia
+- Téléchargement de milliers de pages Wikipédia sur des films (format HTML)
 - Preprocessing des données en récupérant les deux premières sections de chaque page (parsing HTML)
 - Calcul des embeddings avec BERT (utilisation d'un modèle multilingue pré-entrainé).
 - Stockage des encoding avec la librairie Annoy
@@ -15,6 +15,7 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 
 **Du 13/10/2020 au 03/11/2020**
 
+- Décision de travailler sur la totalité du corpus d'articles de Wikipédia (plusieurs millions)
 - Utilisation de parsers HTML et XML sur un dump Wikipedia.
 - Preprocessing du texte pour éliminer les tags non traités par les parsers.
 - Récupération des titres des articles et des liens internes (wikilinks)
