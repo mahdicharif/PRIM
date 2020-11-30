@@ -12,6 +12,7 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 - Stockage des encoding avec la librairie Annoy
 --> ceci facilite l'import des articles encodé pour les comparer avec un nouvel article en entrée. Ceci permet de n'avoir à encoder qu'un seul article à chaque manipulation.
 
+
 **Du 13/10/2020 au 03/11/2020**
 
 - Utilisation de parsers HTML et XML sur un dump Wikipedia.
@@ -21,6 +22,7 @@ Les dumps Wikipedia sont extraits à partir de ce site : https://dumps.wikimedia
 - Calcul de la similarité entre les différents textes.
 
 --> utilisation de BERT (impliquant des transformers).
+
 
 **Du 03/11/2020 au 17/11/2020**
 
@@ -39,6 +41,7 @@ Objectif pour les prochaines semaines :
 - Création de graphes sur la totalité du dataset et calcul du shortest path.
 --> essai des fonctions de networkx et essai de pyspdag 
 
+
 **Du 17/11/2020 au 01/12/2020**
 
 - Application des techniques de parsing à la totalité du dump
@@ -52,3 +55,6 @@ NB : Un problème de connexion SSH m'a empêché d'utiliser les ressources des m
 
 - Gestion des redirections
 --> Le processing du dump de la totalité de Wikipédia permet de trouver les pages de redirection, chose qui n'était pas possible sur une petite portion du dump (comme lors des semaines précédentes).
+
+L'édition des graphes n'a pas pu être effectuée car la taille du dataset des liens internes affiliés aux articles étaient trop importante. Une erreur de mémoire était renvoyée, même en utilisant un autre format plus adapté aux données volumineuses (ex: shelve).
+J'ai voulu effectuer ces opérations coûteuses sur une machine de Télécom, bien plus puissante, mais un problème de connexion SSH est apparu. Ce problème est en cours de résolution.
