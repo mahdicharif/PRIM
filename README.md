@@ -65,9 +65,13 @@ J'ai voulu effectuer ces opérations coûteuses sur une machine de Télécom, bi
 
 - Changement du stockage des données : utilisation de sqlite3 et création d'un fichier .db
 - Lancement en tâche de fond du processing du dump sur une machine distante de Télécom.
---> Près de 48h d'exécution
---> Le Wikipédia anglais contient près de 6 million d'articles (sans compter les articles de redirection etc...)
+--> Plus de 24h d'exécution
+--> Le Wikipédia anglais contient près de 6 million d'articles. Cependant, il existe également des articles de redirection et d'autres pages. Elles seront également extraites lors du parsing du document.
 - Stockage des articles, contenant du texte ou redirigeant vers un autre article, des pages propres aux catégories etc... La pluralité des natures des pages Wikipédia justifie le dépassement des 6 millions d'articles traités.
 - La structure du fichier est la suivante : (Nom de l'article, Texte de l'article, Liens internes, Nom de l'article de redirection).
 Le "Nom de l'article de redirection" représente le nom récupérés dans le texte de l'article, si le mot "REDIRECT" est compris dans le texte. Dans le cas où cette condition n'est pas vérifiée, ce champ est égal à 0. Ceci me permet de ne pas avoir à stocker plusieurs fois un même texte.
 --> Gain d'espace en mémoire et de chargement des données
+
+**Nombre de pages extraites et traitées** : 20 115 899
+
+Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de chaque article avec json. Ce format est supporté par sqlite3. 
