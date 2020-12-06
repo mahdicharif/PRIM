@@ -5,6 +5,8 @@ import re
 from annoy import AnnoyIndex
 from sentence_transformers import SentenceTransformer,util
 import mwparserfromhell
+import sqlite3
+import json
 
 
 # Cette fonction vient en complément des parsers, afin de parfaire certains parsing ne nettoyant pas le texte de façon optimale.
@@ -58,7 +60,13 @@ class WikiXmlHandler(xml.sax.handler.ContentHandler):
                 
 # Cette fonction reprend la classe précédente et effectue le processing sur tout un dump. Elle produit des fichiers pickle contenant les articles, leurs textes et les liens internes.
                 
+
 def process_data(path):
+    conn = sqlite3.connect("/home/infres/mcharif/articles.db")
+    c = conn.cursor()
+    c.execute("CREATE TABLE Article(Name_article, Text_article, Links, Redirect)")
+    conn.commit()
+    conn.close()
 
     # Object for handling xml
     handler = WikiXmlHandler()
@@ -68,56 +76,71 @@ def process_data(path):
     parser.setContentHandler(handler)
     i = 0
     old = 0
-    for line in bz2.BZ2File(data_path, 'r'):
+    for line in bz2.BZ2File(path, 'r'):
         parser.feed(line)
         if i == 0:
             old = len(handler._pages)
-            i+=1
+            i += 1
         else:
             temp_old = len(handler._pages)
-            
+
             if old != len(handler._pages):
-                i+=1
+                i += 1
                 temp_old = len(handler._pages)
 
-                if  i % 100000 == 0:
+                if i % 100 == 0:
 
                     print("{} articles have been processed".format(i))
 
-
-                    article_name = []
-                    text_article = []
-                    wikil = [] # Cette liste contient tous les wikilinks/liens internes
+                    elements_insert = []
 
                     for p in handler._pages:
+
                         chosen_page = p
+                        wikilinks = list(map(str, chosen_page[2]))
+                        wikilinks = json.dumps(wikilinks).encode('utf8')
 
-                        article_name.append(chosen_page[0])
+                        redir = chosen_page[1]
+                        redirr = False
 
-                        text_article.append(chosen_page[1])
+                        if "REDIRECT" in redir:
+                            redirr = redir.replace("REDIRECT", "")
+                        if "REDIRECT " in redir:
+                            redirr = redir.replace("REDIRECT ", "")
+                        if "redirect" in redir:
+                            redirr = redir.replace("redirect", "")
+                        if "redirect " in redir:
+                            redirr = redir.replace("redirect ", "")
 
-                        wikil.append(chosen_page[2])
+                        elements_insert.append((chosen_page[0], chosen_page[1], wikilinks, redirr))
 
-                    for k in range(len(wikil)):
-                        wikil[k] = list(map(str, wikil[k]))
+                    u = 0
+                    while True and u <= 3:
+                        try:
+                            conn = sqlite3.connect("/home/infres/mcharif/articles.db")
+                        except:
+                            u += 1
+                            continue
 
-                    dict_articles = {"Name_article" : article_name, "Text_article" : text_article, "Links" : wikil}
-                    links_nodes = pd.DataFrame(data = dict_articles) 
+                        c = conn.cursor()
 
-                    links_nodes.to_pickle("D:/XML/data/links_nodes_" + str(i/100000) + ".pkl")
-                    
+                        c.executemany('INSERT INTO Article VALUES (?,?,?,?)', elements_insert)
+
+                        conn.commit()
+                        conn.close()
+
+                        break
+
                     old = len(handler._pages)
-                    
-                    links_nodes, dict_articles, article_name, text_article, wikil = [None]*5
 
+                    elements_insert = None
 
                     # Object for handling xml
                     handler._pages = []
                     temp_old = 0
-                    
-                    time.sleep(30)
 
             old = temp_old
+
         
 # Cette fonction prend en compte les redirections de chaque article et tente de récupérer le contenu de l'article vers lequel il est redirigé
         
