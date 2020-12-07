@@ -76,8 +76,8 @@ Le "Nom de l'article de redirection" représente le nom récupérés dans le tex
 
 Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de chaque article avec json. Ce format est supporté par sqlite3. 
 
-- Encoding des articles sur la machine de Télécom (longue et lourde opérations sur des millions de textes)
+- Encoding des articles sur la machine de Télécom (longue et lourde opération sur des millions de textes)
 - Sachant qu'il y avait près de 50% des articles qui n'étaient que des redirections, j'ai décidé d'encoder les textes des articles ayant leur propre texte.
 Ceci m'évite de stocker des encodings d'articles en doublon.
 
---> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours. Je travaillerai sur la génération d'un graphe, entre-temps.
+--> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours. Entre-temps, je travaillerai sur la génération d'un graphe.
