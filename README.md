@@ -76,5 +76,5 @@ Le "Nom de l'article de redirection" représente le nom récupérés dans le tex
 
 Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de chaque article avec json. Ce format est supporté par sqlite3. 
 
-- Encoding des articles sur la machine de Télécom (longue et lourde opérations sur des millions de textes).
-**Problème rencontré**: la version de Python installée sur la machine est trop récente. Les développeurs de TensorFlow et de PyTorch n'ont pas adapté leurs modules à cette version. Je dois donc downgrader Python à la version 3.8.
+- Encoding des articles sur la machine de Télécom (longue et lourde opérations sur des millions de textes)
+--> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours. Je travaillerai sur la génération d'un graphe, entre-temps.
