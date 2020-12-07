@@ -80,4 +80,5 @@ Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de 
 - Sachant qu'il y avait près de 50% des articles qui n'étaient que des redirections, j'ai décidé d'encoder les textes des articles ayant leur propre texte.
 Ceci m'évite de stocker des encodings d'articles en doublon.
 
---> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours. Entre-temps, je travaillerai sur la génération d'un graphe.
+--> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours.
+Dans le doute, j'ai également commencé à chercher une autre solution de stockage, notamment via Sqlite3 (solution développée pendant la semaine de 08/12/2020).
