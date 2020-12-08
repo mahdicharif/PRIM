@@ -81,4 +81,11 @@ Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de 
 Ceci m'évite de stocker des encodings d'articles en doublon.
 
 --> action lancée le 07/12/2020. J'estime que la génération du fichier contenant tous les embeddings prendra plusieurs jours.
-Dans le doute, j'ai également commencé à chercher une autre solution de stockage, notamment via Sqlite3 (solution développée pendant la semaine de 08/12/2020).
+Dans le doute, j'ai également commencé à chercher une autre solution de stockage, notamment via Sqlite3 (solution développée dès le 08/12/2020).
+
+
+**Du 08/12/2020 au 15/12/2020**
+
+- Encoding des textes et stockage dans une base de données Sqlite. 
+--> nouvelle estimation portant l'encoding sur 10 jours, environ. Il s'agit d'une tâche de fond, déléguée à la LAME de Télécom via la commande *tmux*.
+- Appropriation de la librairie Networkdisk pour le stockage d'un très grand graphe. 
