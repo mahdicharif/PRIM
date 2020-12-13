@@ -91,6 +91,7 @@ Dans le doute, j'ai également commencé à chercher une autre solution de stock
 - Problèmes de permission sur le fichier généré. Le statut du fichier change en pleine exécution de mon script Python. 
 - 11/12/2020 : problème réglé par l'utilisation d'un espace de stockage persisté. Lancement de l'encoding le 11/12/2020 à 01:08.
 - Appropriation de la librairie Networkdisk pour le stockage d'un très grand graphe. 
+--> Il y a 383 121 958 d'edges.
 
 TO DO quand l'encoding sera terminé : utiliser DB Browser pour attribuer à la colonne des vecteurs un type "array" afin de pouvoir convertir le format json en un array, ayant oublié de le faire au préalable. 
 Ceci m'éviterait de devoir convertir chaque ligne individuellement après l'import de la base de données.
