@@ -98,3 +98,10 @@ Ceci m'éviterait de devoir convertir chaque ligne individuellement après l'imp
 J'ai dû tester plusieurs façons d'insérer les données : par tranches de 10 millions d'edges, en ingérant tous les liens dans la base de données... J'ai finalement retenu une insertion par tranche de 80 millions d'edges.
 
 **Le 18/12/2020 : insertion des edges dans une base de données : 66 GB, plus de 200 millions d'edges.**
+
+
+**Du 18/12/2020 au 03/01/2021**
+
+- Fin de l'encoding des articles le 21/12/2020 à 9:43. Le fichier pèse 43GO. J'ai stocké les vecteurs après les avoir convertis bytes (format supporté par SQLite).
+
+Concernant le graphe : définition des pistes d'exploitation avec M. Paperman à venir.
