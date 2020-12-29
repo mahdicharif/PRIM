@@ -105,3 +105,8 @@ J'ai dû tester plusieurs façons d'insérer les données : par tranches de 10 m
 - Fin de l'encoding des articles le 21/12/2020 à 9:43. Le fichier pèse 43GO. J'ai stocké les vecteurs après les avoir convertis bytes (format supporté par SQLite).
 
 Concernant le graphe : définition des pistes d'exploitation avec M. Paperman à venir.
+
+- Echange par mails avec M. Paperman : 
+
+--> Création d'un petit tutoriel présentant mon script de création du graphe avec Networkdisk.
+--> Faire une application de démonstration via Flask
