@@ -119,4 +119,4 @@ J'ai donc relancé la création de la base de données des articles.
 
 --> 20 776 899 articles stockés
 
-- Exécution du script de création du graph. Estimation du temps d'exécution égal à 24h.
+- Exécution du script de création du graph. Cette opération devrait prendre quelques heures.
