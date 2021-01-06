@@ -72,7 +72,7 @@ J'ai voulu effectuer ces opérations coûteuses sur une machine de Télécom, bi
 Le "Nom de l'article de redirection" représente le nom récupérés dans le texte de l'article, si le mot "REDIRECT" est compris dans le texte. Dans le cas où cette condition n'est pas vérifiée, ce champ est égal à 0. Ceci me permet de ne pas avoir à stocker plusieurs fois un même texte.
 --> Gain d'espace en mémoire et de chargement des données
 
-**Nombre de pages extraites et traitées** : 20 776 899
+**Nombre de pages extraites et traitées** : 20 100 899
 
 Afin de pouvoir stocker les liens internes, j'ai converti la liste des liens de chaque article avec json. Ce format est supporté par sqlite3. 
 
@@ -110,3 +110,13 @@ Concernant le graphe : définition des pistes d'exploitation avec M. Paperman à
 
 --> Création d'un petit tutoriel présentant mon script de création du graphe avec Networkdisk.
 --> Faire une application de démonstration via Flask
+
+
+**Du 03/01/2021 au 12/01/2021**
+
+- Détection de pages manquantes. Une condition dans mon script, sur les pages "disambiguation", m'a fait rater certaines grosses pages.
+J'ai donc relancé la création de la base de données des articles.
+
+--> 20 776 899 articles stockés
+
+- Exécution du script de création du graph. Estimation du temps d'exécution égal à 24h.
