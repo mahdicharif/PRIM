@@ -120,3 +120,12 @@ J'ai donc relancé la création de la base de données des articles.
 --> 20 776 899 articles stockés
 
 - Exécution du script de création du graph. Cette opération devrait prendre quelques heures.
+
+**Du 13/01/2021 au 27/01/2021**
+
+- Ecriture d'un script shell pour lancer les processus suivants : 
+
+1) Téléchargement du fichier XML compressé des articles de Wikipédia
+2) Création de la base de données des articles, de leurs textes et leurs liens internes
+3) Création de la base de données des embeddings
+4) Création du graph, avec l'utilisation de Networkdisk
