@@ -121,6 +121,7 @@ J'ai donc relancé la création de la base de données des articles.
 
 - Exécution du script de création du graph. Cette opération devrait prendre quelques heures.
 
+
 **Du 13/01/2021 au 27/01/2021**
 
 - Ecriture d'un script shell pour lancer les processus suivants : 
@@ -129,3 +130,8 @@ J'ai donc relancé la création de la base de données des articles.
 2) Création de la base de données des articles, de leurs textes et leurs liens internes
 3) Création de la base de données des embeddings
 4) Création du graph, avec l'utilisation de Networkdisk
+
+
+**Du 27/01/2021 au 15/02/2021**
+
+Modification du script shell pour corriger les différents bugs
