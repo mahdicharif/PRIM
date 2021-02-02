@@ -1,9 +1,10 @@
-#!/bin/bash
+#! /bin/bash
 
 #pdir: the program dir (where to find subscripts)
 pdir="$(dirname $0)"
 pdir="${pdir:-.}"
 pdir="${pdir%/}"
+wiki_url="https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-pages-articles-multistream.xml.bz2"
 
 #option flags (c.f. help)
 clean=true
@@ -34,21 +35,22 @@ dirpath="${1:-.}"
 [ ! -d "$dirpath" ] && echo "$dirpath: not a directory" >&2 && exit 1
 dirpath="${dirpath%/}/$(date "+%y%m%d")"
 
-
 #Download and import
 if $force || [ ! -f "$dirpath/art.db" ]
 then
 	echo "Caution, the script will download large files"
 	mkdir -p "$dirpath"
-	if [ ! -f "$dirpath/dblp.xml" ]; then
-		wget -P "$dirpath" https://dumps.wikimedia.org/enwiki/20201001/enwiki-20201001-pages-articles.xml.bz2
+	if [ ! -f "$dirpath/wiki.xml.bz2" ]; then
+		if ! wget -O "$dirpath/wiki.xml.bz2" "$wiki_url"; then
+			exit 1;
+		fi
 	fi
 	echo "Parsing of Wikipedia"
-	eval "$pdir/create_db.py" "$dirpath"
+	python3 "$pdir/create_db.py" "$dirpath"
 	echo "Creating the embeddings"
-	eval "$pdir/encode.py" "$dirpath"
+	python3 "$pdir/encode.py" "$dirpath"
 	echo "Creating the graph"
-	eval "$pdir/graph.py" "$dirpath"
+	pyhton3 "$pdir/graph.py" "$dirpath"
 
 else
 	echo "Wikipedia graph found in $dirpath/digraph.db (use -f to overwrite)."
