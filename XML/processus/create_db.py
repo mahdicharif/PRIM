@@ -14,9 +14,9 @@ import time
 sys.path.append(f"{cdir}/../")
 import networkdisk as nd
 import collections
-cleanr = re.compile('<.*?>')
 stripws = re.compile("\s+")
-extract_word = re.compile("\s(\w+)")
+cleanr  = re.compile("(<.*?>)|({.*?})")
+extract_word = re.compile("\w[\w,!?\-.\s]+")
 extract_wikilink = re.compile("\[\[([^|\]]*)")
 txt_limit = 1000
 commit_factor = 10**3 
@@ -25,8 +25,9 @@ ns = "{http://www.mediawiki.org/xml/export-0.10/}"
 def cleanhtml(raw_html):
     cleantext = raw_html[:txt_limit]
     cleantext = cleanr.sub('', cleantext)
+    cleantext = stripws.sub(' ', cleantext)
     cleantext = extract_word.finditer(cleantext)
-    cleantext = " ".join(filter(bool, map(lambda e:e.groups()[0], cleantext)))
+    cleantext = " ".join(filter(bool, map(lambda e:e.group(), cleantext)))
     return cleantext
 
 page_class = collections.namedtuple("page_class", ("title", "links", "redirect", "content"))
@@ -50,12 +51,6 @@ def create_nd_graph(path):
         T0 = time.time_ns()
         title = page.find(f"{ns}title").text
         content = page.find(f"{ns}revision/{ns}text").text
-        it = extract_word.finditer(content)
-        clear_content = ""
-        for j, a in enumerate(it):
-            clear_content += " "+a.groups()[0]
-            if j > 200:
-                break
         links = extract_wikilink.findall(content)
         redirect = page.find(f"{ns}redirect")
         if redirect is not None:
