@@ -18,19 +18,21 @@ cleanr = re.compile('<.*?>')
 stripws = re.compile("\s+")
 extract_word = re.compile("\s(\w+)")
 extract_wikilink = re.compile("\[\[([^|\]]*)")
-txt_limit = 202
+txt_limit = 1000
 commit_factor = 10**3 
 ns = "{http://www.mediawiki.org/xml/export-0.10/}"
 
 def cleanhtml(raw_html):
-    cleantext = re.sub(cleanr, '', raw_html)
-    cleantext = " ".join(filter(bool, stripws.split(cleantext)[:txt_limit]))
+    cleantext = raw_html[:txt_limit]
+    cleantext = cleanr.sub('', cleantext)
+    cleantext = extract_word.finditer(cleantext)
+    cleantext = " ".join(filter(bool, map(lambda e:e.groups()[0], cleantext)))
     return cleantext
 
 page_class = collections.namedtuple("page_class", ("title", "links", "redirect", "content"))
 
 def create_nd_graph(path):
-    G = nd.sqlite.DiGraph(db=f"{path}wiki.db", sql_logger=False, insert_schema=True)
+    G = nd.sqlite.DiGraph(db=f"{path}wiki.db", sql_logger=False, name="wiki", insert_schema=True)
     i = 0
     Tinit = T = time.time_ns()
     fsize = os.stat(f"{path}wiki.xml.bz2").st_size
@@ -58,7 +60,7 @@ def create_nd_graph(path):
         redirect = page.find(f"{ns}redirect")
         if redirect is not None:
             redirect = redirect.attrib["title"]
-        pages.append(page_class(title=title, links=links, content=content, redirect=redirect))
+        pages.append(page_class(title=title, links=links, content=cleanhtml(content), redirect=redirect))
         if len(pages) > commit_factor:
             T2, T3, T4 = load_graph(pages)
             if i:
