@@ -132,6 +132,17 @@ J'ai donc relancé la création de la base de données des articles.
 4) Création du graph, avec l'utilisation de Networkdisk
 
 
-**Du 27/01/2021 au 15/02/2021**
+**Du 27/01/2021 au 17/02/2021**
 
 Modification du script shell pour corriger les différents bugs
+Modification du script Python 
+--> toutes les données seront stockées dans un graphe généré par Networkdisk
+--> modification du cleansing du texte : utilisation de regexp
+
+Ecriture du rapport du projet
+Préparation de la soutenance
+
+
+**Le 18/02/2021**
+
+Soutenance du projet en présence du tuteur et du référent
